@@ -18,4 +18,8 @@
 #
 class Tweet < ApplicationRecord
   belongs_to :user
+
+  scope :get_cursor, -> (cursor) {
+    where('created_at < ?', Time.at(cursor.to_i)).order(created_at: :desc) if cursor.present?
+  }
 end

@@ -40,6 +40,7 @@ group :development, :test do
   gem "faker"
   gem "database_cleaner"
   gem "simplecov"
+  gem 'pry-rails', :group => :development
 end
 
 group :development do

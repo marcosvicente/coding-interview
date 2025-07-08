@@ -19,5 +19,15 @@
 require 'rails_helper'
 
 RSpec.describe Tweet, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "validate scopes" do
+    let!(:tweet_1) { create_list(:tweet, 10) }
+    let!(:tweet_2) { create(:tweet, created_at: 10.days.ago) }
+    let(:cursor) { Time.now }
+
+    context ".get_cursor" do
+      it "should be return value of scope" do
+        expect(Tweet.get_cursor(cursor).count).to eq(1)
+      end
+    end
+  end
 end
