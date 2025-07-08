@@ -4,7 +4,7 @@ RUN apt-get update -qq && apt-get install -y postgresql-client shared-mime-info 
 RUN mkdir /app
 WORKDIR /app
 COPY Gemfile /app/Gemfile
-# COPY Gemfile.lock /app/Gemfile.lock
+COPY Gemfile.lock /app/Gemfile.lock
 # Para funcionar no M1
 RUN bundle config set force_ruby_platform true
 RUN bundle install
