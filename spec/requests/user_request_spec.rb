@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-
   RSpec.shared_context 'with multiple companies' do
     let!(:company_1) { create(:company) }
     let!(:company_2) { create(:company) }

@@ -59,3 +59,8 @@ build-iPhoneSimulator/
 # .rubocop-https?--*
 
 log/
+
+coverage
+coverage/
+tmp
+log/
