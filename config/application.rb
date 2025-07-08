@@ -8,7 +8,7 @@ require "active_record/railtie"
 require "active_storage/engine"
 require "action_controller/railtie"
 require "action_mailer/railtie"
-# require "action_mailbox/engine"
+require "action_mailbox/engine"
 # require "action_text/engine"
 require "action_view/railtie"
 require "action_cable/engine"
@@ -21,7 +21,7 @@ Bundler.require(*Rails.groups)
 module SocialFeed
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults 7.2
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.

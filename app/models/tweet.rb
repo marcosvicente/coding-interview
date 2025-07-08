@@ -17,4 +17,5 @@
 #  user_id  (user_id => users.id)
 #
 class Tweet < ApplicationRecord
+  belongs_to :user
 end
