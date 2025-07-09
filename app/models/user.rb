@@ -25,4 +25,10 @@ class User < ApplicationRecord
   scope :by_username, -> (username) { 
     where('lower(username) LIKE ?',"%#{username.to_s.downcase}%") if username.present?
   }
+
+  before_create :send_email
+
+  def send_email
+    CreateUserMailer.send_email(self.email).deliver_now
+  end
 end

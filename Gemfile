@@ -36,6 +36,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 5.0.2'
   gem 'faker'
   gem "rspec-rails", "~> 8.0.1"
+  gem 'rubocop', require: false
   gem "shoulda-matchers", "~> 4.0"
   gem "faker"
   gem "database_cleaner"
@@ -49,8 +50,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'annotate'
+  gem 'letter_opener'
 end
-
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

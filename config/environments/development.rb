@@ -28,6 +28,10 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  # mailcatcher
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
+
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
