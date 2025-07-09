@@ -8,5 +8,6 @@
 #  updated_at :datetime         not null
 #
 class Company < ApplicationRecord
-  has_many :users
+  has_many :users, dependent: :destroy_async
+
 end
