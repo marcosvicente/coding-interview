@@ -162,3 +162,14 @@ reports GET    /reports
 ```
 
 E clicar nos links que fara o download. OBS: pode demorar um pouco por que sidekiq esta rodando
+
+
+7 - Abrir o arquivo
+
+```
+coverage/index.html
+```
+Obs: rodar os teste antes
+```
+$ docker-compose run web bundle exec rspec
+```

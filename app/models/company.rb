@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: companies
@@ -13,5 +15,8 @@
 #
 class Company < ApplicationRecord
   has_many :users, dependent: :destroy_async
+
+  validates :name, presence: true
+  validates :name, uniqueness: true
 
 end

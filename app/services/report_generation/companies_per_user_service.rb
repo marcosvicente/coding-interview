@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 module ReportGeneration
   class CompaniesPerUserService
-
-    FILENAME = "companies_per_user"
+    FILENAME = 'companies_per_user'
     def call
-      headers = "Id;Name;Cont User"
+      headers = 'Id;Name;Cont User'
 
       generate_csv(headers)
     end
 
     private
+
     def generate_row
       rows = []
       companies = Company.all

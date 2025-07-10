@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Request
   module AuthHelpers
     def response_body(symbolize_keys: false)

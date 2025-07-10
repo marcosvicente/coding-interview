@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: tweets
@@ -20,14 +22,23 @@
 require 'rails_helper'
 
 RSpec.describe Tweet, type: :model do
-  describe "validate scopes" do
+
+  it { should belong_to(:user) }
+  it { should validate_presence_of(:body) }
+
+  describe 'validate scopes' do
     let!(:tweet_1) { create_list(:tweet, 10) }
     let!(:tweet_2) { create(:tweet, created_at: 10.days.ago) }
     let(:cursor) { Time.now }
 
-    context ".get_cursor" do
-      it "should be return value of scope" do
+    let(:cursor_query) do
+      Tweet.where('created_at < ?', Time.at(cursor.to_i)).order(created_at: :desc)
+    end
+
+    context '.get_cursor' do
+      it 'should be return value of scope' do
         expect(Tweet.get_cursor(cursor).count).to eq(1)
+        expect(Tweet.get_cursor(cursor)).to eq(cursor_query)
       end
     end
   end

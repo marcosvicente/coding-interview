@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: tweets
@@ -20,7 +22,9 @@
 class Tweet < ApplicationRecord
   belongs_to :user
 
-  scope :get_cursor, -> (cursor) {
+  validates :body, presence: true
+
+  scope :get_cursor, lambda { |cursor|
     where('created_at < ?', Time.at(cursor.to_i)).order(created_at: :desc) if cursor.present?
   }
 end

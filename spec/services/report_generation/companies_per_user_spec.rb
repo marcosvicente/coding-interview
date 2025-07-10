@@ -2,17 +2,17 @@
 
 require 'rails_helper'
 
-RSpec.describe ReportGeneration::UserPerTweetService, type: :service do
+RSpec.describe ReportGeneration::CompaniesPerUserService, type: :service do
   describe 'should be generate csv' do
-    FILENAME = 'user_per_tweet_service'
+    FILENAME = 'companies_per_user'
 
     context 'with valid values' do
-      let!(:tweets) { create_list(:tweet, 20) }
-      let(:headers) { %w[Id Username Email Body] }
+      let!(:companies) { create_list(:company, 20) }
+      let(:headers) { 'Id;Name;UserCount' }
       let(:rows) do
         values = []
-        tweets.each do |tweet|
-          values << "#{tweet.id};#{tweet.user.username};#{tweet.user.email};#{tweet.body}"
+        companies.each do |company|
+          values << "#{company.id};#{company.name};#{company.users.count}"
         end
         values
       end
@@ -22,7 +22,7 @@ RSpec.describe ReportGeneration::UserPerTweetService, type: :service do
 
       context 'should be create csv' do
         it 'creates CSV file with proper value in rows' do
-          rows.reverse.each_with_index do |row, index|
+          rows.each_with_index do |row, index|
             next if index == 1
 
             expect(csv_file[index]).to eq(row)

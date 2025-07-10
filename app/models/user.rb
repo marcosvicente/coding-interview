@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -22,14 +24,17 @@
 class User < ApplicationRecord
   belongs_to :company
 
-  scope :by_company, -> (company_id) { where(company_id: company_id) if company_id.present? }
-  scope :by_username, -> (username) { 
-    where('lower(username) LIKE ?',"%#{username.to_s.downcase}%") if username.present?
+  scope :by_company, ->(company_id) { where(company_id: company_id) if company_id.present? }
+  scope :by_username, lambda { |username|
+    where('lower(username) LIKE ?', "%#{username.to_s.downcase}%") if username.present?
   }
 
-  before_create :send_email
+  validates :username, :email, presence: true
+
+  after_create :send_email
+
 
   def send_email
-    CreateUserMailer.send_email(self.email).deliver_now
+    CreateUserMailer.send_email(self.email).deliver_now if self.email.nil?
   end
 end
