@@ -10,6 +10,7 @@
 #
 # Indexes
 #
+#  index_tweets_on_body     (body)
 #  index_tweets_on_user_id  (user_id)
 #
 # Foreign Keys

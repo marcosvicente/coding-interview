@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_08_171921) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_10_124553) do
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.index ["name"], name: "index_companies_on_name"
   end
 
   create_table "tweets", force: :cascade do |t|
@@ -22,6 +23,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_08_171921) do
     t.text "body"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.index ["body"], name: "index_tweets_on_body"
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
@@ -33,6 +35,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_08_171921) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["company_id"], name: "index_users_on_company_id"
+    t.index ["display_name", "username", "email"], name: "index_users_on_display_name_and_username_and_email"
   end
 
   add_foreign_key "tweets", "users"

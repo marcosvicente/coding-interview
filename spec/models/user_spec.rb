@@ -12,7 +12,8 @@
 #
 # Indexes
 #
-#  index_users_on_company_id  (company_id)
+#  index_users_on_company_id                           (company_id)
+#  index_users_on_display_name_and_username_and_email  (display_name,username,email)
 #
 # Foreign Keys
 #
