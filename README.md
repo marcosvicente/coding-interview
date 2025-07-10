@@ -114,4 +114,51 @@ $ sudo gpasswd -a $USER docker
 
 ## Como testar
 
-**preencher como testar**
+
+1- Entrar nas rotas
+
+```
+GET    /companies/:company_id/users
+GET    /users/:user_id/tweets
+```
+
+2 - Rodar comando
+```
+$ docker-compose run web bundle exec rspec
+```
+
+3 - Entrar nas rotas especificadas nos teste 
+```
+GET /tweets
+GET /users/:user_id/tweets
+```
+
+4 - Entrar nas rotas
+```
+GET    /companies/:company_id/users(.:format)                                                            users#index
+GET    /companies(.:format)                                                                              companies#index
+POST   /companies(.:format)                                                                              companies#create
+GET    /companies/new(.:format)                                                                          companies#new
+GET    /companies/:id/edit(.:format)                                                                     companies#edit
+GET    /companies/:id(.:format)                                                                          companies#show
+PATCH  /companies/:id(.:format)                                                                          companies#update
+PUT    /companies/:id(.:format)                                                                          companies#update
+DELETE /companies/:id(.:format)
+```
+5 - Entrar no console e rodar
+
+```
+$ docker-compose run web bash bundle exec rails c
+```
+Dentro do console
+```
+$ FactoryBot.create(:user)
+```
+
+6 - Entrar no rota
+
+```
+reports GET    /reports
+```
+
+E clicar nos links que fara o download. OBS: pode demorar um pouco por que sidekiq esta rodando
