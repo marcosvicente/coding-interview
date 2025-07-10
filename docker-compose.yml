@@ -1,38 +1,25 @@
-version: '3'
+version: "3.9"
 services:
-  mailcatcher:
-    restart: always
-    image: schickling/mailcatcher
-    ports:
-    - "1080:1080"
-    - "1025:1025"
   redis:
-    image: redis
-    command: redis-server
+    image: redis:8.0.3
     ports:
       - "6379:6379"
   sidekiq:
-    depends_on:
-      - redis
-      - web
-    environment:
-      - LOCAL=localhost
     build: .
-    command: bash -c "bundle install && bundle exec sidekiq -q default -q treatment -q active_storage_purge -q active_storage_analysis -q treatment_close -q process_photos -q album_approve"
+    command: bundle exec sidekiq -C config/sidekiq.yml
     volumes:
       - .:/app
+    depends_on:
+      - redis
   web:
-    depends_on:
-      - redis
-    environment:
-      - LOCAL=localhost
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle install && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    build:
+      context: .
+      args:
+        BUNDLE_GEMS__CONTRIBSYS__COM: $BUNDLE_GEMS__CONTRIBSYS__COM
+    command: bash -c "rm -f tmp/pids/server.pid && bin/rails s -p 3000 -b '0.0.0.0'"
     volumes:
-      - .:/app
-    links:
-      - mailcatcher
+      - .:/app:cached
     ports:
       - "3000:3000"
-    stdin_open: true
-    tty: true
+    depends_on:
+      - redis
